@@ -2,8 +2,6 @@ services:
   roproxy-lite:
     build: .
     container_name: roproxy-lite
-    ports:
-      - "8080:8080"
     environment:
       PORT: "8080"
       TIMEOUT: "5"
