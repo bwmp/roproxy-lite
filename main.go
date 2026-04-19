@@ -12,6 +12,7 @@ import (
 var timeout, _ = strconv.Atoi(os.Getenv("TIMEOUT"))
 var retries, _ = strconv.Atoi(os.Getenv("RETRIES"))
 var port = os.Getenv("PORT")
+var healthOK = []byte("ok")
 
 var client *fasthttp.Client
 
@@ -29,9 +30,10 @@ func main() {
 }
 
 func requestHandler(ctx *fasthttp.RequestCtx) {
-	if string(ctx.Path()) == "/health" || string(ctx.Path()) == "/healthz" {
+	path := string(ctx.Path())
+	if path == "/health" || path == "/healthz" {
 		ctx.SetStatusCode(200)
-		ctx.SetBody([]byte("ok"))
+		ctx.SetBody(healthOK)
 		return
 	}
 
