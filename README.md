@@ -33,6 +33,8 @@ docker compose up -d --build
 
 Then access the proxy at `http://localhost:8080`.
 
+Health check endpoint: `GET /health` (also `/healthz`) returns `200 ok`.
+
 ## Coolify
 
 1. Create a new service in Coolify from this repository.

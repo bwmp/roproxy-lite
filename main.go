@@ -29,6 +29,12 @@ func main() {
 }
 
 func requestHandler(ctx *fasthttp.RequestCtx) {
+	if string(ctx.Path()) == "/health" || string(ctx.Path()) == "/healthz" {
+		ctx.SetStatusCode(200)
+		ctx.SetBody([]byte("ok"))
+		return
+	}
+
 	val, ok := os.LookupEnv("KEY")
 
 	if ok && string(ctx.Request.Header.Peek("PROXYKEY")) != val {
